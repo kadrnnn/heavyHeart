@@ -1,5 +1,6 @@
 package com.itlife.heavyheart.project.controller;
 
+import com.itlife.heavyheart.FeignService;
 import com.itlife.heavyheart.nettygo.client.NettyClientHandler;
 import com.itlife.heavyheart.project.model.Member;
 import com.itlife.heavyheart.project.model.UserInfo;
@@ -26,12 +27,12 @@ public class AdminController {
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     @Resource
     AdminService adminService;
-    //@Resource
-    //FeignService feignService;
+    @Resource
+    FeignService feignService;
 
     @PostMapping("/success")
     public ResultBean login(@RequestBody Map<String, Object> map) {
-        //String kadrn = feignService.mark("kadrn");
+        String kadrn = feignService.mark("2");
         return ResultUtils.success(adminService.login(map.get("username").toString(), map.get("password").toString()));
     }
 

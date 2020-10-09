@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Create 2020/6/4 15:54
  * @Description
  */
-//@FeignClient(value = "provide", url = "http://127.0.0.1:8180", fallback = FeignServiceFallback.class)
-//public interface FeignService {
-//    @RequestMapping(value = "/kadrn", method = RequestMethod.POST)
-//    String mark(@RequestParam("id") String id);
-//}
+@FeignClient(value = "provide", url = "http://127.0.0.1:8180", fallback = FeignServiceFallback.class)
+public interface FeignService {
+    @RequestMapping(value = "/kadrn", method = RequestMethod.POST)
+    String mark(@RequestParam("id") String id);
+}
