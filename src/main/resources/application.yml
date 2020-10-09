@@ -1,0 +1,59 @@
+server:
+  port: 8761
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+
+spring:
+  datasource:
+    name: dev
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 2
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    timeout: 3000
+    jedis:
+      pool:
+        maxActive: 8
+        minIdle: 0
+        maxWait: 1000
+  application:
+    name: kadrn
+
+feign:
+  hystrix:
+    enabled: on
+
+mybatis:
+  mapperLocations: classpath:/mapper/*.xml
+  configuration:
+    logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+netty:
+  websocket:
+    port: 8888
+    ip: 127.0.0.1
+    maxFrameSize: 10240
+
+
+
+
+

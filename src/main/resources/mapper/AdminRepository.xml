@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlife.heavyheart.project.mapper.AdminRepository">
+    <!--AdminEntity与数据库中的列的映射-->
+    <resultMap id="adminDao" type="com.itlife.heavyheart.security.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <resultMap id="memberDao" type="com.itlife.heavyheart.project.model.Member">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="id_card"/>
+    </resultMap>
+
+    <resultMap id="userinfoDao" type="com.itlife.heavyheart.project.model.UserInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="telephone" column="telephone"/>
+    </resultMap>
+
+
+    <!--admin login -->
+    <select id="login" parameterType="java.lang.String" resultMap="adminDao">
+        SELECT id, username, password FROM sys_user s WHERE s.username=#{username} AND s.password=#{password}
+    </select>
+
+    <insert id="setup" parameterType="java.lang.String">
+        insert  into sys_user values (#{id},#{username},#{password})
+    </insert>
+
+    <insert id="saveUser" parameterType="java.lang.String">
+        insert  into sys_user values (#{user.id},#{user.username},#{user.password})
+    </insert>
+
+    <insert id="saveUserInfo" parameterType="java.lang.String">
+        insert  into userinfo values (#{id},#{userInfo.name},#{userInfo.userId},#{userInfo.telephone})
+    </insert>
+
+    <insert id="saveMember" parameterType="java.lang.String">
+        insert  into member values (#{member.id},#{member.name},#{member.idCard})
+    </insert>
+
+    <select id="searchMember" parameterType="java.lang.String" resultMap="memberDao">
+        SELECT * FROM member
+        <where>
+            <if test="idCard != null and idCard != ''">
+                and id_card = #{idCard}
+            </if>
+        </where>
+    </select>
+
+    <select id="findUser" parameterType="java.lang.String" resultMap="adminDao">
+        SELECT * FROM sys_user where username = #{username} and password = #{password}
+    </select>
+
+    <select id="findUsername" parameterType="java.lang.String" resultMap="adminDao">
+        SELECT * FROM sys_user where username = #{username}
+    </select>
+</mapper>
