@@ -26,7 +26,7 @@ public class WebConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(autoIdempotentInterceptor);
-        //registry.addInterceptor(loginInterceptor);
+        //registry.addInterceptor(autoIdempotentInterceptor);
+        registry.addInterceptor(loginInterceptor);
     }
 }

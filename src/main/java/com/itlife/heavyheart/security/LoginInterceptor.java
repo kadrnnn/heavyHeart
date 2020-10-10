@@ -22,9 +22,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 简单的白名单，登录这个接口直接放行
-        if ("/login".equals(request.getRequestURI())) {
+        if ("/success".equals(request.getRequestURI())) {
             return true;
         }
+        log.info("--interceptorBegin--");
         Claims claims = JwtUtil.parse(request.getHeader("Authorization"));
         if (claims != null) {
             UserContext.add(claims.getSubject());

@@ -5,6 +5,7 @@ import com.itlife.heavyheart.nettygo.client.NettyClientHandler;
 import com.itlife.heavyheart.project.model.Member;
 import com.itlife.heavyheart.project.model.UserInfo;
 import com.itlife.heavyheart.project.service.AdminService;
+import com.itlife.heavyheart.security.JwtUtil;
 import com.itlife.heavyheart.security.User;
 import com.itlife.heavyheart.web.result.ResultBean;
 import com.itlife.heavyheart.web.result.ResultUtils;
@@ -33,7 +34,11 @@ public class AdminController {
     @PostMapping("/success")
     public ResultBean login(@RequestBody Map<String, Object> map) {
         String kadrn = feignService.mark("2");
-        return ResultUtils.success(adminService.login(map.get("username").toString(), map.get("password").toString()));
+        User user = adminService.login(map.get("username").toString(), map.get("password").toString());
+        if(user != null){
+            return ResultUtils.success(JwtUtil.generate(user.getUsername()));
+        }
+        return ResultUtils.error("-1","账号或密码错误，请重新登录");
     }
 
     @PostMapping("/setup")
