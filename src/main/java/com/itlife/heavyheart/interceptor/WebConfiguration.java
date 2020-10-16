@@ -1,5 +1,6 @@
 package com.itlife.heavyheart.interceptor;
 
+import com.itlife.heavyheart.responseresult.ResultFormatInterceptor;
 import com.itlife.heavyheart.security.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,6 +19,8 @@ public class WebConfiguration implements WebMvcConfigurer {
     private AutoIdempotentInterceptor autoIdempotentInterceptor;
     @Resource
     private LoginInterceptor loginInterceptor;
+    @Resource
+    private ResultFormatInterceptor resultFormatInterceptor;
 
     /**
      * 添加拦截器
@@ -28,5 +31,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //registry.addInterceptor(autoIdempotentInterceptor);
         registry.addInterceptor(loginInterceptor);
+        registry.addInterceptor(resultFormatInterceptor);
     }
 }
