@@ -2,6 +2,7 @@ package com.itlife.heavyheart.project.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -9,6 +10,7 @@ import lombok.EqualsAndHashCode;
  * @Create 2020/9/17 15:04
  * @Description
  */
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Address extends BaseEntity {

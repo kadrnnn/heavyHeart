@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
     AddressRepository addressRepository;
 
     @Override
-    @Cacheable(cacheNames = "address-cache")
+    //@Cacheable(cacheNames = "address-cache")
     public List<TreeNode> getCity() {
         List<Address> addresses = addressRepository.selectAll();
         List<TreeNode> treeNodeList = buildGroupTree(addresses);
