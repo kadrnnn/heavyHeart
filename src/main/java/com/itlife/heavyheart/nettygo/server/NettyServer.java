@@ -23,13 +23,14 @@ public class NettyServer {
 
     public void start(InetSocketAddress address) {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(2);
         try {
+            // 3种模型 主从模型，单线程模型，混杂模型
             ServerBootstrap bootstrap = new ServerBootstrap()
                     .group(bossGroup, workerGroup) // 绑定线程池
                     .channel(NioServerSocketChannel.class)
                     .localAddress(address)
-                    .childHandler(new NettyServerChannelInitializer()) // 编码解码
+                    .childHandler(new NettyServerChannelInitializer()) // 编码解码 解包粘包
                     .option(ChannelOption.SO_BACKLOG, 128) // 服务端接受连接的队列长度，如果队列已满，客户端连接将被拒绝
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // 保持长连接，2小时无数据激活心跳机制
 
