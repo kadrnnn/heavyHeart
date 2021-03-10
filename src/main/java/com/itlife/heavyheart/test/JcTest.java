@@ -1,5 +1,6 @@
 package com.itlife.heavyheart.test;
 
+import com.google.common.base.Stopwatch;
 import com.itlife.heavyheart.project.model.Address;
 import com.itlife.heavyheart.project.model.BaseEntity;
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
@@ -7,6 +8,7 @@ import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -17,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 public class JcTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         JcTest jcTest = new JcTest();
+        Stopwatch started = Stopwatch.createStarted();
         int n = 10;
         System.out.println(jcTest.good(n));
         jcTest.xor(3, 4);
@@ -24,6 +27,7 @@ public class JcTest {
         CompletableFuture future = new CompletableFuture();
         future.complete("完成");
         System.out.println(future.get().toString());
+        System.out.println(started.elapsed(TimeUnit.MILLISECONDS) + "毫秒");
     }
 
     private int good(int n) {
