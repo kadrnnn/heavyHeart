@@ -1,4 +1,4 @@
-package com.itlife.heavyheart.mutilreactor;
+package com.itlife.heavyheart.multireactor;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
