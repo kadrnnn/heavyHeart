@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.RateLimiter;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
@@ -20,7 +21,12 @@ public class ApiLimitAspect {
     // or RateLimiter
     public static Map<String, RateLimiter> rateLimiterMap = new ConcurrentHashMap<>();
 
-    @Around("execution(*com.itlife.*.*.controller.*.*(..))")
+    @Pointcut("@annotation(com.itlife.heavyheart.apilimit.ApiRateLimit)")
+    public void pointcut() {
+    }
+
+    //@Around("execution(*com.itlife.*.*.controller.*.*(..))")
+    @Around(value = "pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) {
         Object result = null;
         Semaphore semaphore = null;
